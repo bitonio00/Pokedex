@@ -20,8 +20,14 @@ let PokemonsService = class PokemonsService {
     }
     getPokemons() {
         return this.httpService
-            .get('https://pokeapi.co/api/v2/pokemon?limit=151')
-            .pipe((0, operators_1.map)((reponse) => reponse.data));
+            .get('https://pokeapi.co/api/v2/pokemon?limit=889')
+            .pipe((0, operators_1.map)((reponse) => reponse.data.results.map(this.selectFewerProps)), (0, operators_2.catchError)(e => {
+            throw new common_1.HttpException(e.response.data, e.response.status);
+        }));
+    }
+    selectFewerProps(pokemon) {
+        const { name } = pokemon;
+        return { name };
     }
     getPokemon(pokemonId) {
         return this.httpService.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
@@ -38,8 +44,13 @@ let PokemonsService = class PokemonsService {
                 specialAttack: data.stats[3].base_stat,
                 specialDefense: data.stats[4].base_stat,
                 speed: data.stats[5].base_stat,
-            },
+            }
         })), (0, operators_2.catchError)(e => {
+            throw new common_1.HttpException(e.response.data, e.response.status);
+        }));
+    }
+    getPokemonImg(pokemonId) {
+        return this.httpService.get(`https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonId}.png?raw=true`).pipe((0, operators_1.map)((response) => response.data), (0, operators_2.catchError)(e => {
             throw new common_1.HttpException(e.response.data, e.response.status);
         }));
     }

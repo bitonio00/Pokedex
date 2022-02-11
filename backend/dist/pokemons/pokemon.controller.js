@@ -25,6 +25,9 @@ let PokemonsController = class PokemonsController {
     getPokemon(pokemonId) {
         return this.pokemonService.getPokemon(pokemonId);
     }
+    getPokemonImg(pokemonId) {
+        return this.pokemonService.getPokemonImg(pokemonId);
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -39,6 +42,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], PokemonsController.prototype, "getPokemon", null);
+__decorate([
+    (0, common_1.Get)('/image/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], PokemonsController.prototype, "getPokemonImg", null);
 PokemonsController = __decorate([
     (0, common_1.Controller)('pokemons'),
     __metadata("design:paramtypes", [pokemon_service_1.PokemonsService])

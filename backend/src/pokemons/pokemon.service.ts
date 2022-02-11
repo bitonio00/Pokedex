@@ -24,10 +24,18 @@ export class PokemonsService {
 
       getPokemons  (){
           return this.httpService
-          .get('https://pokeapi.co/api/v2/pokemon?limit=151')
+          .get('https://pokeapi.co/api/v2/pokemon?limit=889')
           .pipe(
-          map((reponse)=> reponse.data)      
+          map((reponse)=> reponse.data.results.map(this.selectFewerProps)),
+        catchError(e => {
+          throw new HttpException(e.response.data, e.response.status);
+        }),
+            
           )
+    }
+     selectFewerProps(pokemon){
+      const {name} = pokemon;
+      return {name};
     }
 
     getPokemon (pokemonId: string | number){
@@ -47,8 +55,7 @@ export class PokemonsService {
               specialAttack: data.stats[3].base_stat,
               specialDefense: data.stats[4].base_stat,
               speed: data.stats[5].base_stat,
-            },
-            //image:this.getPokemonImg(data.id),
+            }
  
         })),
         catchError(e => {
@@ -57,17 +64,18 @@ export class PokemonsService {
         )
     }
 
-    /*getPokemonImg(pokemonId:any){
-      
-      return this.httpService.get(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`)
-      .pipe(
-        map((reponse)=> reponse.data) 
-      )
-    }*/
-    
+    getPokemonImg(pokemonId:number){
+
+      return this.httpService.get(`https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonId}.png?raw=true`).pipe(map((response)=>response.data)
+      ,
+        catchError(e => {
+          throw new HttpException(e.response.data, e.response.status);
+        }),)
+           
+    }
 
     
-
+    
 }
 
 

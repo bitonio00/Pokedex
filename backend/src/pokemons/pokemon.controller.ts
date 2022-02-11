@@ -10,7 +10,11 @@ export class PokemonsController {
 
     @Get()
     getPokemons() {
-        return this.pokemonService.getPokemons()
+       
+            return this.pokemonService.getPokemons()
+        
+
+        
     }
 
     @Get(':id')
@@ -18,11 +22,10 @@ export class PokemonsController {
         return  this.pokemonService.getPokemon(pokemonId)
        
     }
-
-    /*@Get(':id')
-    getPokemon(@Param('id') pokemonId: number,) {
+    @Get('/image/:id')
+     getPokemonImg(@Param('id') pokemonId:number){
         return  this.pokemonService.getPokemonImg(pokemonId)
-       
-    }*/
+    }
+
 
 }

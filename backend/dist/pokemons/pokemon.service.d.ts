@@ -3,6 +3,9 @@ export declare class PokemonsService {
     private httpService;
     constructor(httpService: HttpService);
     getPokemons(): import("rxjs").Observable<any>;
+    selectFewerProps(pokemon: any): {
+        name: any;
+    };
     getPokemon(pokemonId: string | number): import("rxjs").Observable<{
         name: any;
         id: any;
@@ -18,4 +21,5 @@ export declare class PokemonsService {
             speed: any;
         };
     }>;
+    getPokemonImg(pokemonId: number): import("rxjs").Observable<any>;
 }

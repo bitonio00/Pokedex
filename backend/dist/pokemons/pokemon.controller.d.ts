@@ -18,4 +18,5 @@ export declare class PokemonsController {
             speed: any;
         };
     }>;
+    getPokemonImg(pokemonId: number): import("rxjs").Observable<any>;
 }
