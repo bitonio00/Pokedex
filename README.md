@@ -20,7 +20,7 @@
 
   ```
   - Faire sur deux terminales différents :
-  "back-end": npm run start
+  "backend": npm run start
   "front-end":npm run start
 
   ```
